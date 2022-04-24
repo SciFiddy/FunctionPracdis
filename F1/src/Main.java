@@ -1,16 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Main {
-    public enum Age {
-        TWENTY_ONE,
-        TWENTY_TWO,
-        TWENTY_THREE,
-        TWENTY_FOUR;
-    }
+
 
     public static void main(String[] args) {
-        System.out.println("Fizzbin.");
+        System.out.println("Fizzbin ready to rock.");
 
 
         List<Person> people = new ArrayList<Person>();
@@ -21,15 +18,25 @@ public class Main {
         people.add(new Person("Deb",Age.TWENTY_THREE));
 
 
-        System.out.println("Fizzbin Out.");
+
+        System.out.println(people.stream().filter(person -> Age.TWENTY_ONE.equals(person.age)).count());
 
 
-        people.stream().filter(person -> ).
+        List<Person> ctrl_alt_v_is_cool = people.stream()
+                .filter(person -> Age.TWENTY_FOUR.equals(person.age))
+                .collect(Collectors.toList());
+
+
+        people.stream()
+                .filter(person -> Age.TWENTY_FOUR.equals(person.age))
+                .collect(Collectors.toList())
+                .forEach(System.out::println);
 
 
 
 
 
+        System.out.println("Fizzbin Out!");
     }
 
 
@@ -39,9 +46,26 @@ public class Main {
 
         private Age age;
 
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
+
         public Person(String name, Age age) {
             this.name = name;
             this.age = age;
         }
+    }
+
+
+
+    enum Age {
+        TWENTY_ONE,
+        TWENTY_TWO,
+        TWENTY_THREE,
+        TWENTY_FOUR;
     }
 }
