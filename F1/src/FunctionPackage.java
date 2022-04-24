@@ -1,45 +1,27 @@
-import java.util.function.Predicate;
+import java.util.function.Function;
 
 public class FunctionPackage {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         System.out.println("Fizzbin ready to rock.");
+        Integer j = brokenIncrementFunction.apply(34);
+        Integer k = incrementFunctionThatWorks.apply(34);
 
-        Predicate<String> isBlank = String::isBlank;
-        Predicate<String> isEmpty = String::isEmpty;
-        Predicate<Person> isOldAF = person -> Age.NINETY_NINE.equals(person.age);
+        System.out.println(j);
+        System.out.println(k);
 
         System.out.println("Fizzbin Out!");
     }
 
 
 
-    static class Person{
-        private final String name;
+    static Function<Integer, Integer> brokenIncrementFunction = number -> number++;
+    static Function<Integer, Integer> incrementFunctionThatWorks = number -> number + 1;
 
-        private Age age;
-
-        @Override
-        public String toString() {
-            return "Person{" +
-                    "name='" + name + '\'' +
-                    ", age=" + age +
-                    '}';
-        }
-
-        public Person(String name, Age age) {
-            this.name = name;
-            this.age = age;
-        }
-    }
+    static int incrementByOneMethod(Integer number) {return number++; }
 
 
 
-    enum Age {
-        TWENTY_ONE,
-        TWENTY_TWO,
-        TWENTY_THREE,
-        TWENTY_FOUR,
-        NINETY_NINE;
-    }
+
 }
